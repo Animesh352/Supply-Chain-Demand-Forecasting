@@ -1,0 +1,29 @@
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+m5env/
+
+# Local data/artifacts/logs
+project/data/raw/
+project/models/artifacts/
+*.log
+
+# Build
+build/
+dist/
+*.egg-info/
