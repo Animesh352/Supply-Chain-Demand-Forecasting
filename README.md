@@ -167,16 +167,3 @@ curl -G "http://localhost:8000/optimize" \
 2. Keep `models/artifacts/` out of Git.
 3. Commit source code + README only.
 4. Add screenshots of API docs and dashboard for recruiter-friendly repo presentation.
-
-## Suggested Resume Bullets (Role-Aligned)
-- Built an end-to-end Python analytics system that ingests multi-table supply-chain data, engineers time-series features, and trains an XGBoost forecasting model with rolling-window validation (`MAE`, `RMSE`, `RMSSE`).
-- Designed an inventory decision engine that automates safety stock, reorder point, and EOQ recommendations based on forecast uncertainty and service-level targets.
-- Implemented Monte Carlo simulation to quantify stockout risk and compare baseline vs optimized policy cost outcomes for operational decision support.
-- Delivered production-style interfaces using FastAPI and Streamlit, with containerized deployment via Docker and basic drift monitoring integration using Evidently.
-- Applied modular software engineering practices (separated data, features, modeling, evaluation, optimization, API, and dashboard layers) to support maintainability and enterprise integration.
-
-## Trade Compliance Positioning (for interviews)
-Even though this project is supply-chain focused, the architecture maps directly to trade compliance analytics:
-- Replace SKU demand forecasting with compliance-risk forecasting.
-- Replace inventory policy logic with risk scoring/decision thresholds.
-- Reuse ETL, validation, API, and dashboard framework for entry audits, document checks, and KPI monitoring.
