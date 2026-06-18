@@ -161,9 +161,3 @@ curl -G "http://localhost:8000/optimize" \
   --data-urlencode "stockout_cost=5.0" \
   --data-urlencode "order_cost=50"
 ```
-
-## GitHub Upload Checklist
-1. Keep raw M5 files out of Git (already ignored in root `.gitignore`).
-2. Keep `models/artifacts/` out of Git.
-3. Commit source code + README only.
-4. Add screenshots of API docs and dashboard for recruiter-friendly repo presentation.
