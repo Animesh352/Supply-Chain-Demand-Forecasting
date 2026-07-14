@@ -35,7 +35,9 @@ def compute_inventory_policy(
     safe_demand = max(annual_demand, 1e-6)
     safe_order_cost = max(order_cost, 1e-6)
 
-    eoq = math.sqrt((2.0 * safe_demand * safe_order_cost) / safe_holding_cost)
+    # holding_cost is per unit per day (consistent with the Monte Carlo loop).
+    # EOQ needs annual holding cost, so scale up by 365.
+    eoq = math.sqrt((2.0 * safe_demand * safe_order_cost) / (safe_holding_cost * 365.0))
 
     return InventoryPolicyResult(
         safety_stock=float(max(safety_stock, 0.0)),

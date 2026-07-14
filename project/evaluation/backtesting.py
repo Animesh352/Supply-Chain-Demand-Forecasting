@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 try:
-    from evidently import Report
+    from evidently.report import Report
     from evidently.metric_preset import DataDriftPreset
 except Exception:  # pragma: no cover
     Report = None
