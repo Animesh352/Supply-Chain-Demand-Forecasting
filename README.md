@@ -69,9 +69,7 @@ project/
 | Metrics | MAE, RMSE, RMSSE (Root Mean Squared Scaled Error) |
 | Forecasting | Recursive 30-day forecast per SKU using iterated one-step prediction |
 
-Metrics are printed per fold during training. No precomputed results are committed to the repo -- run `scripts/train_model.py` to reproduce them.
-
-TODO(animesh): save and commit fold-level MAE/RMSSE table after running on the full M5 dataset.
+Fold-level MAE, RMSE, and RMSSE are printed to stdout during training. No precomputed results are committed because they depend on which stores and date range you train on -- run `scripts/train_model.py` to reproduce them on your own split.
 
 ## Inventory optimization
 

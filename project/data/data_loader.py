@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import pandas as pd
 
@@ -14,6 +14,7 @@ class M5DataLoader:
     calendar_path: Path
     sell_prices_path: Path
     sales_train_validation_path: Path
+    store_ids: Optional[List[str]] = field(default=None)
 
     def load_calendar(self) -> pd.DataFrame:
         calendar = pd.read_csv(self.calendar_path)
@@ -24,7 +25,10 @@ class M5DataLoader:
         return pd.read_csv(self.sell_prices_path)
 
     def load_sales(self) -> pd.DataFrame:
-        return pd.read_csv(self.sales_train_validation_path)
+        df = pd.read_csv(self.sales_train_validation_path)
+        if self.store_ids:
+            df = df[df["store_id"].isin(self.store_ids)].reset_index(drop=True)
+        return df
 
     @staticmethod
     def _day_columns(df: pd.DataFrame) -> List[str]:
@@ -71,6 +75,12 @@ class M5DataLoader:
             .transform(lambda s: s.ffill().bfill())
             .fillna(df["sell_price"].median())
         )
+
+        # Event columns are NaN on non-event days; fill with a sentinel so
+        # dropna in feature engineering only removes rows with missing lag/roll.
+        for col in ["event_name_1", "event_type_1", "event_name_2", "event_type_2"]:
+            if col in df.columns:
+                df[col] = df[col].fillna("none")
 
         # Stable time ordering for feature generation and model training.
         df = df.sort_values(["sku_id", "date"]).reset_index(drop=True)
